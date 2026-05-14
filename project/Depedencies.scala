@@ -2,7 +2,7 @@ import sbt.*
 
 object Dependencies {
   object aws {
-    private val awsSdkVersion = "2.44.0"
+    private val awsSdkVersion = "2.44.4"
     val auth                  = "software.amazon.awssdk" % "auth"       % awsSdkVersion
     val awsCore               = "software.amazon.awssdk" % "aws-core"       % awsSdkVersion
     val rds                   = "software.amazon.awssdk" % "rds"       % awsSdkVersion
@@ -16,10 +16,10 @@ object Dependencies {
   }
 
   object database {
-    private val postgresVersion = "42.7.6"
+    private val postgresVersion = "42.7.11"
     val postgresDriver          = "org.postgresql" % "postgresql" % postgresVersion
 
-    private val awsAdvancedJdbcVersion = "3.2.0"
+    private val awsAdvancedJdbcVersion = "4.0.1"
     val awsAdvancedJdbcDriver          = "software.amazon.jdbc" % "aws-advanced-jdbc-wrapper" % awsAdvancedJdbcVersion
 
     val all: Seq[ModuleID] = Seq(postgresDriver, awsAdvancedJdbcDriver)
