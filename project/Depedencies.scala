@@ -2,7 +2,7 @@ import sbt.*
 
 object Dependencies {
   object aws {
-    private val awsSdkVersion = "2.44.0"
+    private val awsSdkVersion = "2.44.4"
     val auth                  = "software.amazon.awssdk" % "auth"       % awsSdkVersion
     val awsCore               = "software.amazon.awssdk" % "aws-core"       % awsSdkVersion
     val rds                   = "software.amazon.awssdk" % "rds"       % awsSdkVersion
@@ -16,17 +16,17 @@ object Dependencies {
   }
 
   object database {
-    private val postgresVersion = "42.7.6"
+    private val postgresVersion = "42.7.12"
     val postgresDriver          = "org.postgresql" % "postgresql" % postgresVersion
 
-    private val awsAdvancedJdbcVersion = "3.2.0"
+    private val awsAdvancedJdbcVersion = "4.1.0"
     val awsAdvancedJdbcDriver          = "software.amazon.jdbc" % "aws-advanced-jdbc-wrapper" % awsAdvancedJdbcVersion
 
     val all: Seq[ModuleID] = Seq(postgresDriver, awsAdvancedJdbcDriver)
   }
 
   object flyway {
-    private val flywayVersion = "12.5.0"
+    private val flywayVersion = "12.9.0"
     val core                  = "org.flywaydb" % "flyway-core"                % flywayVersion
     val postgres              = "org.flywaydb" % "flyway-database-postgresql" % flywayVersion
 
@@ -41,7 +41,7 @@ object Dependencies {
   }
 
   object netty {
-    private val nettyVersion = "2.0.77.Final"
+    private val nettyVersion = "2.0.80.Final"
     val nettyTCNative        = "io.netty" % "netty-tcnative" % nettyVersion
 
     val all: Seq[ModuleID] = Seq(nettyTCNative)

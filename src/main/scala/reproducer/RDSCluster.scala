@@ -22,7 +22,7 @@ object RDSCluster {
       request
         .dbClusterIdentifier(clusterId)
         .engine("aurora-postgresql")
-        .engineVersion("16.8")
+        .engineVersion("17.9")
         .engineMode("serverless")
         .databaseName(dbName)
         .masterUsername(username)
