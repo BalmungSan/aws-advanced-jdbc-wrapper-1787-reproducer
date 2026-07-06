@@ -3,10 +3,12 @@ package reproducer
 import java.util.Properties
 import javax.sql.DataSource
 import org.postgresql.ds.PGSimpleDataSource
+import org.slf4j.Logger
+import software.amazon.jdbc.Driver
 import software.amazon.jdbc.ds.AwsWrapperDataSource
 
 object PostgresDataSource {
-  def make(config: PostgresConfig, schema: String): DataSource =
+  def make(logger: Logger, config: PostgresConfig, schema: String): DataSource =
     // Use the AWS advanced-jdbc-wrapper DataSource.
     val dataSource = new AwsWrapperDataSource()
     val targetDataSourceProps = new Properties()
@@ -27,6 +29,10 @@ object PostgresDataSource {
 
     // Configure the schema.
     targetDataSourceProps.setProperty("currentSchema", schema)
+    Driver.setConnectionInitFunc { (connection, _, _, props) =>
+      logger.info(s"PROPS SCHEMA: ${props.getProperty("currentSchema")}")
+      logger.info(s"CONNECTION SCHEMA: ${connection.getSchema()}")
+    }
 
     // Return the configured DataSource.
     dataSource

@@ -15,7 +15,7 @@ object Main {
     val postgresConfig = RDSCluster.make(logger, localstackConfig)
     logger.info(s"POSTGRES CONFIG: ${postgresConfig}")
 
-    val dataSource = PostgresDataSource.make(postgresConfig, schema)
+    val dataSource = PostgresDataSource.make(logger, postgresConfig, schema)
     logger.info(s"POSTGRES DATASOURCE: ${dataSource}")
 
     val migrationResult = Flyway.migrate(dataSource, schema)

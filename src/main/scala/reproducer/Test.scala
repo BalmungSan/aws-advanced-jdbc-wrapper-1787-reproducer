@@ -5,6 +5,7 @@ import java.util.UUID
 import org.slf4j.Logger
 
 object Test {
+  private val schemaStatement = "SELECT current_schema()"
   private val insertStatement = "INSERT INTO reproducer VALUES (?, ?)"
   private val selectStatement = "SELECT details FROM reproducer WHERE id = ? LIMIT 1"
 
@@ -13,6 +14,11 @@ object Test {
     logger.info(s"TEST: ${uuid}")
 
     val connection = dataSource.getConnection()
+
+    val preparedSchema = connection.prepareStatement(schemaStatement)
+    val schemaResult = preparedSchema.executeQuery()
+    schemaResult.next()
+    logger.info(s"QUERY SCHEMA: ${schemaResult.getString(1)}")
 
     val preparedInsert = connection.prepareStatement(insertStatement)
     preparedInsert.setObject(1, uuid)
